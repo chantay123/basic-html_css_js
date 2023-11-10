@@ -1,0 +1,13 @@
+body{
+  background-color: rgb(84, 215, 171);
+}
+
+.textclass{
+  text-align: justify;
+}
+.container{
+  background-color: white;
+  width: 800px;
+  height: 500px;
+  border-radius: 5px;
+}
