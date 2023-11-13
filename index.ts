@@ -1,17 +1,58 @@
-// sumOfCubes([1, 5, 9]) ➞ 855
-// // Since 1^3 + 5^3 + 9^3 = 1 + 125 + 729 = 855
+const studentform = document.getElementById("student-form");
+const task = <HTMLInputElement>document.getElementById("Name");
 
-// sumOfCubes([3, 4, 5]) ➞ 216
+const listtest = document.getElementById("list-test");
 
-// sumOfCubes([2]) ➞ 8
+const submit = document.getElementById("submit");
 
-// sumOfCubes([]) ➞ 0
+let element: HTMLTableRowElement | null = null;
 
+//Add
+function taskadd() {
+  if (element != null) {
+    if (task.value === "") {
+      alert("please fill in something!");
+    } else {
+      element.getElementsByTagName("td")[0].textContent = task.value;
+      element = null;
+      task.value = "";
+    }
+    return;
+  }
 
-let a :number[]  = [1,5,9];
-let sum:number = 0;
+  if (task.value === "") {
+    alert("you must fill something!");
+    console.log("success!");
+  } else {
+    const tr = document.createElement("tr");
+    const tdName = document.createElement("td");
+    const tdAction = document.createElement("td");
+    const btnDelete = document.createElement("button");
+    const btnEdit = document.createElement("button");
 
-for(let i=0 ;i < a.length ;i++ ){
-    sum += Math.pow(a[i],3);
-    console.log(sum);
-};
+    listtest?.appendChild(tr);
+    tr.appendChild(tdName);
+    tr.appendChild(tdAction);
+
+    tdAction.appendChild(btnEdit);
+    tdAction.appendChild(btnDelete);
+
+    btnEdit.textContent = "Edit";
+    btnDelete.textContent = "Delete";
+    btnEdit.classList.add("btn", "btn-warning", "btn-sm", "edit");
+    btnDelete.classList.add("btn", "btn-danger", "btn-sm", "delete");
+    tdName.textContent = task.value;
+    task.value = "";
+
+    btnDelete.addEventListener("click", () => {
+      listtest?.removeChild(tr);
+    });
+
+    btnEdit.addEventListener("click", edit);
+    function edit() {
+      element = tr;
+      task.value = tdName.textContent ?? "";
+      console.log(tdName.textContent);
+    }
+  }
+}
